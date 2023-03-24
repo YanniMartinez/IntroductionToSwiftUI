@@ -8,8 +8,9 @@
 import Foundation
 import SwiftUI
 import CoreLocation
-/**Crearemos estructura para leer los datos del JSON**/
-struct Landmark: Hashable, Codable{
+/**Crearemos estructura para leer los datos del JSON
+ Si ponemos que conforme a identifiable podemos omitir el ide en el archivo de landmark listt **/
+struct Landmark: Hashable, Codable, Identifiable{
     //Mapeamos los atributos de los elementos
     var id: Int
     var name: String
