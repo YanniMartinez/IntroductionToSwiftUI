@@ -8,43 +8,51 @@
 import SwiftUI
 
 struct LandmarkDetail: View {
-    var body: some View {
-        VStack{
-            //ScrollView es una vista
-            MapView()
-                .ignoresSafeArea(edges: .top)//Ignora el area de seguridad
-                .frame(height: 300)
-            CircleImage()
-                .offset(y:-125)
-                .padding(.bottom,-130)
-            
-            VStack(alignment:.leading){//Puede heredar de vistas padre en este caso la alineacion
-                
-                
-                Text("Turtle Rock")
-                    .font(.title)
-                    .foregroundColor(.green)
-                HStack{
-                    Text("Joshua Tree National Park")
+    var landmark: Landmark
+    
+        
+        
+        var body: some View {
+            ScrollView{
+                VStack{
+                    //ScrollView es una vista
+                    MapView(coordinate: landmark.locationCoordinate)
+                        .ignoresSafeArea(edges: .top)//Ignora el area de seguridad
+                        .frame(height: 300)
+                    CircleImage(image: landmark.image)
+                        .offset(y:-125)
+                        .padding(.bottom,-130)
+                    
+                    VStack(alignment:.leading){//Puede heredar de vistas padre en este caso la alineacion
                         
-                    Spacer()
-                    Text("California").font(.subheadline)
-                }.font(.subheadline) //Esto haria que se propage entre todos los elementos contenidos en la horizontal
-                    .foregroundColor(.secondary) //Aclaro un poco la letra del subtitulo
-                
-                Divider()// Genera una linea
-                Text("About Turtle Rock")
-                    .font(.title2)
-                Text("Description About Turtle Rock")
-                
-            }.padding(40)//Afecta toda la vista y lo que hay dentro de ella
-            Spacer()//Empuja la vista hacia arriba
+                        
+                        Text( landmark.name)
+                            .font(.title)
+                            .foregroundColor(.green)
+                        HStack{
+                            Text(landmark.park)
+                            
+                            Spacer()
+                            Text(landmark.state).font(.subheadline)
+                        }.font(.subheadline) //Esto haria que se propage entre todos los elementos contenidos en la horizontal
+                            .foregroundColor(.secondary) //Aclaro un poco la letra del subtitulo
+                        
+                        Divider()// Genera una linea
+                        Text(landmark.name)
+                            .font(.title2)
+                        Text(landmark.description)
+                        
+                    }.padding(40)//Afecta toda la vista y lo que hay dentro de ella
+                    Spacer()//Empuja la vista hacia arriba
+                }
+            }.navigationTitle(landmark.name)
+                .navigationBarTitleDisplayMode(.inline)
         }
-    }
+        
 }
 
 struct LandmarkDetail_Previews: PreviewProvider {
     static var previews: some View {
-        LandmarkDetail()
+        LandmarkDetail(landmark: landmarks[0])
     }
 }

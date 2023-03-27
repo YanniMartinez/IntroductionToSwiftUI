@@ -21,13 +21,13 @@ func load<T: Decodable>(_ filename: String) -> T{
     do{
         data = try Data(contentsOf: file)
     }catch{
-        fatalError("Could not load \(filename)")
+        fatalError("Could not load \(filename) from main bundle:\n\(error)")
     }
     
     do{//Intenta decodioficar el contenido a un modelo
         let decoder = JSONDecoder()
         return try decoder.decode(T.self, from: data)
     }catch{
-        
+        fatalError("Couldn't parse \(filename) as \(T.self):\n\(error)")
     }
 }
