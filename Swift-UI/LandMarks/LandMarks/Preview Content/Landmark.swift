@@ -17,6 +17,7 @@ struct Landmark: Hashable, Codable, Identifiable{
     var park: String
     var state: String
     var description: String
+    var isFavorite: Bool //Servira como un indicador para ver si se trata de un elemento favorito
     
     private var imageName: String //Tener una imagen como propiedad
     var image: Image{

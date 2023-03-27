@@ -19,6 +19,13 @@ struct LandmarkRow: View {
                 .frame(width: 50,height: 50)
             Text(landmark.name)
             Spacer()
+            
+            //Este lo que hara es mostrar un icono de favorito seguido de la fila del elemento
+            if landmark.isFavorite {
+                Image(systemName: "star.fill")
+                    .foregroundColor(.yellow) //Coloca de color amarillo el elemento
+                        // Solo lo colorea de amarillo si existe el icono
+            }
         }
     }
 }

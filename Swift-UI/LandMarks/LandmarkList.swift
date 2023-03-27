@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct LandmarkList: View {
+    
+    //Este es un elemento necesario debido a que estamos haciendo uso de estados y uso de cada uno de los elementos que tenemos en la lista
+    @State private var showFavoritesOnly = false
+    
     var body: some View {
         NavigationView{
             
