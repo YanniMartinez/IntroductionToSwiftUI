@@ -12,26 +12,62 @@ struct LandmarkList: View {
     //Este es un elemento necesario debido a que estamos haciendo uso de estados y uso de cada uno de los elementos que tenemos en la lista
     @State private var showFavoritesOnly = false
     
-    var body: some View {
-        NavigationView{
+    var filteredLandmarks: [Landmark] {
+        landmarks.filter { landmark in
+            (!showFavoritesOnly || landmark.isFavorite)
+        }
+    }
+    
+    /*var body: some View {
+        NavigationView{*/
             
             //Si tenemos identifiable podemos omitir el id: \.id
-            List(landmarks, id: \.id){landmark in
-                
-                NavigationLink{
+            //List(landmarks, id: \.id){landmark in
+            /*List {
+                ForEach(filteredLandmarks) {
+                    landmark in NavigationLink
+                {
+                                
                     LandmarkDetail(landmark:landmark)
                 } label:{
                     LandmarkRow(landmark: landmark)//Genera vista de forma dinamica
                 }
-            }.navigationTitle("Landmarks")
+            }.navigationTitle("Landmarks")*/
             /*List{
                 LandmarkRow(landmark: landmarks[0])
                 LandmarkRow(landmark: landmarks[1])
                 LandmarkRow(landmark: landmarks[2])
             }*/
-        }
+            
+            /**
+             
+             var filteredLandmarks: [Landmark] {
+                     landmarks.filter { landmark in
+                         (!showFavoritesOnly || landmark.isFavorite)
+                     }
+                 }
+             
+        }*/
         
-    }
+    
+        var body: some View {
+            NavigationView {
+                List {
+                    Toggle(isOn: $showFavoritesOnly) {
+                        Text("Favorites only")
+                    }
+
+                    ForEach(filteredLandmarks) { landmark in
+                        NavigationLink {
+                            LandmarkDetail(landmark: landmark)
+                        } label: {
+                            LandmarkRow(landmark: landmark)
+                        }
+                    }
+                }
+                .navigationTitle("Landmarks")
+            }
+        }
 }
 
 struct LandmarkList_Previews: PreviewProvider {
